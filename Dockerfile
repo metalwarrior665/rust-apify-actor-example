@@ -6,6 +6,6 @@ COPY . .
 
 # For production use, change to optimized build 
 # RUN cargo build --release
-RUN cargo build
+RUN cargo build --release
 
-CMD ["./target/debug/actor-example"]
+CMD ["./target/release/actor-example"]
