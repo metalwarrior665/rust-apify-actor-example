@@ -25,6 +25,7 @@ fn http_request_put(url: &str, payload: String) {
     // Put request requires building a HTTP client variable
     let client = reqwest::blocking::Client::new();
     client.put(url)
+        .header(reqwest::header::CONTENT_TYPE, "text/html")
         .body(payload)
         .send()
         .expect("Put request failed");
@@ -56,7 +57,8 @@ pub fn set_output (html: String) {
 
    if is_on_apify {
         let default_kv = env::var("APIFY_DEFAULT_KEY_VALUE_STORE_ID").unwrap();
-        let output_url = format!("https://api.apify.com/v2/key-value-stores/{}/records/OUTPUT", default_kv);
+        let token = env::var("APIFY_TOKEN").unwrap();
+        let output_url = format!("https://api.apify.com/v2/key-value-stores/{}/records/OUTPUT?token={}", default_kv, token);
         http_request_put(&output_url, html);
     } else {
         // Standard path where local INPUT is stored
