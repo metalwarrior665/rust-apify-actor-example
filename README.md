@@ -1,5 +1,5 @@
 # Empty project
-
+ 
 This template is useful when you're already familiar with the Apify SDK and want to start
 with a clean slate. It does not include `puppeteer` or `playwright` so install them manually
 and update the Dockerfile if you need them.
