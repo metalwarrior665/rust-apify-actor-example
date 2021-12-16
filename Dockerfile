@@ -3,7 +3,7 @@
 FROM rust:1
 
 # We copy only package setup so we cache building all dependencies
-COPY Cargo* .
+COPY Cargo* ./
 
 # We need to have dummy main.rs file to be able to build
 RUN mkdir src && touch src/main.rs
@@ -15,7 +15,7 @@ RUN cargo build --release
 RUN rm src/main.rs
 
 # Copy rest of the files
-COPY . .
+COPY . ./
 
 # Build the source files
 RUN cargo build --release
