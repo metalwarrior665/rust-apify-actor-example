@@ -2,10 +2,22 @@
 # https://hub.docker.com/_/rust
 FROM rust:1
 
+# We copy only package setup so we cache building all dependencies
+COPY Cargo* .
+
+# We need to have dummy main.rs file to be able to build
+RUN mkdir src && touch src/main.rs
+
+# Build dependencies only
+RUN cargo build --release
+
+# Delete dummy main.rs
+RUN rm src/main.rs
+
+# Copy rest of the files
 COPY . .
 
-# For production use, change to optimized build 
-# RUN cargo build --release
+# Build the source files
 RUN cargo build --release
 
 CMD ["./target/release/actor-example"]
