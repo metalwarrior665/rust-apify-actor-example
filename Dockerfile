@@ -12,7 +12,7 @@ RUN mkdir src && echo "fn main() {}" > src/main.rs
 RUN cargo build --release
 
 # Delete dummy main.rs
-RUN rm src/main.rs
+RUN rm -rf src
 
 # Copy rest of the files
 COPY . ./

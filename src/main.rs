@@ -13,6 +13,7 @@ pub struct Input {
 
 // This code works both locally and on Apify platform
 fn main () {
+    println!("Starting the run, loading input");
     // Get input that contains URL
     let input = get_input();
     println!("Loaded input with URL: {}", &input.url);
