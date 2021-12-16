@@ -6,7 +6,7 @@ FROM rust:1
 COPY Cargo* ./
 
 # We need to have dummy main.rs file to be able to build
-RUN mkdir src && touch src/main.rs
+RUN mkdir src && echo "fn main() {}" > src/main.rs
 
 # Build dependencies only
 RUN cargo build --release
