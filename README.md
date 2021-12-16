@@ -1,35 +1,31 @@
-# Empty project
- 
-This template is useful when you're already familiar with the Apify SDK and want to start
-with a clean slate. It does not include `puppeteer` or `playwright` so install them manually
-and update the Dockerfile if you need them.
+# Example Apify actor in Rust
 
-If you're looking for examples or want to learn more visit:
+Minimal example for developing Apify actor in [Rust programming language](https://www.rust-lang.org/). The code is [open source](https://github.com/metalwarrior665/rust-apify-actor-example).
 
-- [Tutorial](https://sdk.apify.com/docs/guides/getting-started)
-- [Documentation](https://sdk.apify.com/docs/api/apify)
-- [Examples](https://sdk.apify.com/docs/examples/crawl-multiple-urls)
+The example:
+- Reads user provided URL from input
+- Does HTTP request to get HTML from this URL
+- Saves HTML into OUTPUT record in Key Value Store
 
-## Documentation reference
+This actor works both on Apify platform and locally.
 
-- [Apify SDK](https://sdk.apify.com/)
-- [Apify Actor documentation](https://docs.apify.com/actor)
-- [Apify CLI](https://docs.apify.com/cli)
+## Local usage
+For local usage, you need to: 
+1. Clone the [repository](https://github.com/metalwarrior665/rust-apify-actor-example)
+2. [Install Rust](https://www.rust-lang.org/tools/install)
+3. Create local storage with `apify init` or manually create folder path `apify_storage/key_value_stores/default/`
+4. Add `INPUT.json` file input inside this path that looks like this: 
+```json
+{
+    "url": "https://apify.com"
+}
+```
+5. Build and run the solution with `cargo run`
+6. You can find `OUTPUT.html` next to `INPUT.json`
 
-## Writing a README
+## Current problems
+- Apify currently doesn't allow increasing memory for builds so they sometimes fails by running out of memory
+- Apify caches the Docker images on its servers. Rust is not yet used much there so a lot of runs have slow cold starts.
 
-See our tutorial on [writing READMEs for your actors](https://help.apify.com/en/articles/2912548-how-to-write-great-readme-for-your-actors) if you need more inspiration.
-
-### Table of contents
-
-If your README requires a table of contents, use the template below and make sure to keep the `<!-- toc start -->` and `<!-- toc end -->` markers.
-
-<!-- toc start -->
-- Introduction
-- Use Cases
-  - Case 1
-  - Case 2
-- Input
-- Output
-- Miscellaneous
- <!-- toc end -->
+## Where next?
+If you want to see more complex scraping project in Rust, check [Rust Scraper](https://apify.com/lukaskrivka/rust-scraper) which is also [open source](https://github.com/metalwarrior665/actor-rust-scraper)
